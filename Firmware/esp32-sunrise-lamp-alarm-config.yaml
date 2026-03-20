@@ -1,0 +1,34 @@
+esphome:
+  name: sunrise-lamp-alarm-esp
+  friendly_name: Sunrise Lamp Alarm ESP
+
+esp32:
+  board: esp32-c6-devkitc-1
+  framework:
+    type: esp-idf
+
+logger:
+  level: DEBUG
+
+api:
+  encryption:
+    key: "Your_API_Encryption_Key" #TODO: Change this to your API encryption key
+
+ota:
+  password: "Your_OTA_Password" #TODO: Change this to your OTA password
+
+wifi:
+  ssid: "Your_WiFi_SSID" #TODO: Change this to your WiFi SSID
+  password: "Your_WiFi_Password" #TODO: Change this to your WiFi password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Sunrise Lamp Alarm Fallback Hotspot"
+    password: "Your_Fallback_Password" #TODO: Change this to your fallback password
+
+captive_portal:
+
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    update_interval: 60s
