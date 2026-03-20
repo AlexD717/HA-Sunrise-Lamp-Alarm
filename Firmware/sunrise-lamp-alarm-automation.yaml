@@ -6,7 +6,8 @@ blueprint:
     target_light:
       name: "Light"
       selector:
-        light: {}
+        entity:
+          domain: light
     start_wake_up_time:
       name: "Start wake up time"
       description: "The time when the light should start getting brighter"
