@@ -1,0 +1,67 @@
+blueprint:
+  name: "Sunrise Alarm"
+  description: "Gradually increases light brightness before wake up time"
+  domain: automation
+  input: 
+    target_light:
+      name: "Light"
+      selector:
+        light: {}
+    start_wake_up_time:
+      name: "Start wake up time"
+      description: "The time when the light should start getting brighter"
+      selector:
+        time: {}
+    days_of_the_week:
+      name: "Days"
+      description: "What days the alarm should run"
+      selector:
+        select: 
+          options:
+            - "Monday"
+            - "Tuesday"
+            - "Wednesday"
+            - "Thursday"
+            - "Friday"
+            - "Saturday"
+            - "Sunday"
+          multiple: true
+    wake_up_duration:
+      name: "Wake up duration"
+      description: "How long it takes for the light to become fully bright"
+      selector:
+        number:
+          min: 5
+          max: 60
+          unit_of_measurement: minutes
+    chosen_color_temperature:
+      name: "Color temperature"
+      description: "Color temperature in mireds"
+      selector:
+        color_temp:
+
+trigger:
+  - platform: time
+    at: !input start_wake_up_time
+
+condition:
+  - condition: template
+    value_template: >
+      {{ now().strftime('%A') in !input days_of_the_week }}
+
+action:
+  - action: light.turn_on
+    target:
+      entity_id: !input target_light
+    data:
+      brightness_pct: 1
+      color_temp: !input chosen_color_temperature
+      transition: 0
+
+  - action: light.turn_on
+    target:
+      entity_id: !input target_light
+    data:
+      brightness_pct: 100
+      color_temp: !input chosen_color_temperature
+      transition: "{{ !input wake_up_duration * 60}}"

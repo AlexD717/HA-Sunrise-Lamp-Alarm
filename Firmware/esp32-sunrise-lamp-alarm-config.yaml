@@ -15,7 +15,8 @@ api:
     key: "Your_API_Encryption_Key" #TODO: Change this to your API encryption key
 
 ota:
-  password: "Your_OTA_Password" #TODO: Change this to your OTA password
+  - platform: esphome
+    password: "Your_OTA_Password" #TODO: Change this to your OTA password
 
 wifi:
   ssid: "Your_WiFi_SSID" #TODO: Change this to your WiFi SSID
@@ -27,6 +28,26 @@ wifi:
     password: "Your_Fallback_Password" #TODO: Change this to your fallback password
 
 captive_portal:
+
+# https://esphome.io/components/light/neopixelbus/
+light:
+  - platform: neopixelbus
+    type: GRBW
+    variant: WS2812
+    pin: gpio18
+    num_leds: 60
+    name: "Sunrise Lamp Light"
+
+# https://esphome.io/components/binary_sensor/gpio/
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: gpio2
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    name: "Sunrise Lamp Alarm Button"
 
 sensor:
   - platform: wifi_signal
