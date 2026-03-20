@@ -3,9 +3,10 @@ esphome:
   friendly_name: Sunrise Lamp Alarm ESP
 
 esp32:
-  board: esp32-c6-devkitc-1
+  board: seeed_xiao_esp32c3
+  variant: esp32c3
   framework:
-    type: esp-idf
+    type: arduino
 
 logger:
   level: DEBUG
@@ -33,8 +34,8 @@ captive_portal:
 light:
   - platform: neopixelbus
     type: GRBW
-    variant: WS2812
-    pin: gpio18
+    variant: SK6812
+    pin: gpio10
     num_leds: 60
     name: "Sunrise Lamp Light"
 

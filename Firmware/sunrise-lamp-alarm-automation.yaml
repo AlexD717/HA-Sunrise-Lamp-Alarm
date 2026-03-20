@@ -56,8 +56,6 @@ condition:
     value_template: >
       {{ now().strftime('%A') in days }}
 
-
-
 action:
   - action: light.turn_on
     target:
