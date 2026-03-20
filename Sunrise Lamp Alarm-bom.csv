@@ -1,4 +1,4 @@
-Name,Purpose,Quantity,
+Name,Purpose,Quantity
 XIAO ESP32 C3,Connecting to Home Assistant and controlling the light strip,1
 DC5 SK6812 RGBWW (1M 60 IP30 variant),Providing a gradually increasing light source to help wake you up,1
 5V 3A Barrel Jack Power Supply,Supplying the necessary power to the LED strip and microcontroller,1
