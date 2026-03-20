@@ -27,6 +27,8 @@ blueprint:
             - "Saturday"
             - "Sunday"
           multiple: true
+          mode: list
+          sort: false
     wake_up_duration:
       name: "Wake up duration"
       description: "How long it takes for the light to become fully bright"
@@ -41,6 +43,10 @@ blueprint:
       selector:
         color_temp:
 
+variables:
+  duration: !input wake_up_duration
+  days: !input days_of_the_week
+
 trigger:
   - platform: time
     at: !input start_wake_up_time
@@ -48,7 +54,9 @@ trigger:
 condition:
   - condition: template
     value_template: >
-      {{ now().strftime('%A') in !input days_of_the_week }}
+      {{ now().strftime('%A') in days }}
+
+
 
 action:
   - action: light.turn_on
@@ -65,4 +73,4 @@ action:
     data:
       brightness_pct: 100
       color_temp: !input chosen_color_temperature
-      transition: "{{ !input wake_up_duration * 60}}"
+      transition: "{{ duration | int * 60}}"
