@@ -42,6 +42,11 @@ blueprint:
       description: "Color temperature in mireds"
       selector:
         color_temp:
+    dismiss_button:
+      name: "Dismiss Button"
+      selector:
+        entity:
+          domain: binary_sensor
 
 variables:
   duration: !input wake_up_duration
@@ -50,25 +55,40 @@ variables:
 trigger:
   - platform: time
     at: !input start_wake_up_time
-
-condition:
-  - condition: template
-    value_template: >
-      {{ now().strftime('%A') in days }}
+    id: "alarm"
+  - platform: state
+    entity_id: !input dismiss_button
+    to: "on"
+    id: "dismiss"
 
 action:
-  - action: light.turn_on
-    target:
-      entity_id: !input target_light
-    data:
-      brightness_pct: 1
-      color_temp: !input chosen_color_temperature
-      transition: 0
-
-  - action: light.turn_on
-    target:
-      entity_id: !input target_light
-    data:
-      brightness_pct: 100
-      color_temp: !input chosen_color_temperature
-      transition: "{{ duration | int * 60}}"
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: "alarm"
+          - condition: template
+            value_template: >
+              {{ now().strftime('%A') in days }}
+        sequence:
+          - action: light.turn_on
+            target:
+              entity_id: !input target_light
+            data:
+              brightness_pct: 1
+              color_temp: !input chosen_color_temperature
+              transition: 0
+          - action: light.turn_on
+            target:
+              entity_id: !input target_light
+            data:
+              brightness_pct: 100
+              color_temp: !input chosen_color_temperature
+              transition: "{{ duration | int * 60 }}"
+      - conditions:
+          - condition: trigger
+            id: "dismiss"
+        sequence:
+          - action: light.turn_off
+            target:
+              entity_id: !input target_light
+          - stop: "Dismissed by button"
