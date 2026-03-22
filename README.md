@@ -10,19 +10,19 @@ I made this project because I had a fairly old light alarm that I  liked and hel
 
 ### Pictures
 
-![Final Render](assets/Render.png)
+![Final Render](Assets/Render.png)
 
-![Overall CAD](assets/CAD.png)
+![Overall CAD](Assets/CAD.png)
 
-![Side View](assets/SideView.png)
+![Side View](Assets/SideView.png)
 
-![Top View](assets/TopView.png)
+![Top View](Assets/TopView.png)
 
 ## Electrical
 
 This project uses an SK6812 LED, generic keyboard button, and an XIAO ESP32 C3 microcontroller.
 
-![Wiring Diagram](wiring/WiringDiagram.png)
+![Wiring Diagram](Wiring/WiringDiagram.png)
 https://wokwi.com/projects/458952556724127745
 
 Connect 5v from the barrel jack to the 5v port of the ESP and the light strip
