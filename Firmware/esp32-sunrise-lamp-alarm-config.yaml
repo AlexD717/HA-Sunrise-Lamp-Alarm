@@ -30,6 +30,27 @@ wifi:
 
 captive_portal:
 
+spi:
+  clk_pin: GPIO8
+  mosi_pin: GPIO20
+
+time:
+  - platform: homeassistant
+    id: ha_time
+
+font:
+  - file: "gfonts://Roboto"
+    id: time_font
+    size: 40
+
+display:
+  - platform: gc9a01
+    cs_pin: GPIO5
+    dc_pin: GPIO6
+    reset_pin: GPIO7
+    rotation: 0
+    lambda: it.strftime(120, 120, id(time_font), TextAlign::CENTER, "%H:%M", id(ha_time).now());
+
 # https://esphome.io/components/light/neopixelbus/
 light:
   - platform: neopixelbus
@@ -54,3 +75,32 @@ sensor:
   - platform: wifi_signal
     name: "WiFi Signal"
     update_interval: 60s
+  
+  - platform: rotary_encoder
+    name: "Alarm Encoder"
+    pin_a:
+      number: GPIO4
+      mode:
+        input: true
+        pullup: true
+    pin_b:
+      number: GPIO3
+      mode:
+        input: true
+        pullup: true
+    resolution: 1
+    on_value:
+      then:
+        - lambda: |-
+            // Rotate the display based on the encoder position in 90degree increments
+            int state = abs((int)x) % 4; 
+            
+            if (state == 0) {
+              id(my_display).set_rotation(DISPLAY_ROTATION_0_DEGREES);
+            } else if (state == 1) {
+              id(my_display).set_rotation(DISPLAY_ROTATION_90_DEGREES);
+            } else if (state == 2) {
+              id(my_display).set_rotation(DISPLAY_ROTATION_180_DEGREES);
+            } else if (state == 3) {
+              id(my_display).set_rotation(DISPLAY_ROTATION_270_DEGREES);
+            }
