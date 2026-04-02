@@ -25,13 +25,29 @@ This project uses an SK6812 LED, generic keyboard button, and an XIAO ESP32 C3 m
 ![Wiring Diagram](Wiring/WiringDiagram.png)
 https://wokwi.com/projects/458952556724127745
 
-Connect 5v from the barrel jack to the 5v port of the ESP and the light strip
+**VCC**
+- Connect 5v from the barrel jack to the 5v port of the ESP and the light strip
+- Connect 3.3V from the ESP to the GC9A01 display (VCC and BLK pins)
 
-Connect GND from the barrel jack to the GND port of the ESP, the light strip, and one of the button pins
+**GND**
+- Connect GND from the barrel jack to the GND port of the ESP, the light strip, one of the button pins, and the encoder ground
 
-Connect the pin D10 (GPIO 10) to the light strip
+**Light Strip**
+- Connect the pin D10 (GPIO 10) to the light strip
 
-Connect the pin D2 (GPIO 4) to the button
+**Button**
+- Connect the pin D0 (GPIO 2) to the button
+
+**Encoder**
+- Connect pin D2 (GPIO 4) to OUT A
+- Connect pin D1 (GPIO 3) to OUT B
+
+**Display (GC9A01)**
+- Connect D8 (GPIO 8) to SCL
+- Connect D7 (GPIO 20) to SDA
+- Connect D5 (GPIO 7) to RST
+- Connect D4 (GPIO 6) to DC
+- Connect D3 (GPIO 5) to CS
 
 ## BOM
 
