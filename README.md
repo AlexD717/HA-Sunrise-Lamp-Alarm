@@ -8,6 +8,12 @@ This is an alarm clock that integrates with Home Assistant, and helps wake you u
 ### Why I made this project
 I made this project because I had a fairly old light alarm that I  liked and helped me wake up every day. However, it has no smart features and there is no way to configure a schedule (so that it doesn't run on the weekends) or create some cool light effects. This caused me to design my own that would integrate with Home Assistant, allowing me to easily control what days and time it runs, and even create some special effects.
 
+### Features
+- LED strip that gets brighter to wake you up like an alarm
+- Top display showing time, or whatever else you want
+- Top rotaty encoder, default mapped to rotate display but can be remapped to anything
+- Side button to turn off the light
+
 ### Pictures
 
 ![Final Render](Assets/Render.png)
@@ -17,6 +23,8 @@ I made this project because I had a fairly old light alarm that I  liked and hel
 ![Side View](Assets/SideView.png)
 
 ![Top View](Assets/TopView.png)
+
+![Higher Top View](Assets/HigherTopView.png)
 
 ## Electrical
 
